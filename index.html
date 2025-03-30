@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBQI: Federal Blood Quantum Investigations</title>
+    <meta name="description" content="We seek to expose people's blood quantum.">
+    <meta property="og:image" content="#social-share-image-url">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        /* --- Global Color & Font Settings --- */
+        :root {
+            --primary-text: #333;
+            --secondary-text: #555;
+            --background: #f9f9f9;
+            --headings: #222;
+            --links: #004791;
+            --links-hover: #0056b3;
+            --borders: #ddd;
+        }
+
+        /* --- Basic Page Setup --- */
+        body {
+            font-family: sans-serif; /* Simple, standard font */
+            line-height: 1.7;      /* Spacing between lines of text */
+            margin: 0;             /* No default margin around the page */
+            padding: 0;            /* No default padding inside the page */
+            background-color: var(--background);
+            color: var(--primary-text);
+        }
+
+        /* Apply box-sizing to all elements for easier layout */
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        /* --- Main Content Container --- */
+        .content-container {
+            max-width: 1280px; /* Max width of content */
+            width: 90%;        /* Use 90% of width on smaller screens */
+            margin: 0 auto;    /* Center the container */
+        }
+
+        /* --- Typography (Text Styles) --- */
+        h1, h2, h3, h4 {
+            color: var(--headings);
+            font-weight: 700;  /* Bold */
+            margin-top: 0;
+            margin-bottom: 0.75em;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2.0rem; }
+        h3 { font-size: 1.5rem; }
+        h4 { font-size: 1.2rem; text-align: left;} /* Keep press titles left-aligned */
+
+        p {
+            font-size: 1.1rem;
+            margin-top: 0;
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--links);
+            text-decoration: none; /* No underline by default */
+        }
+
+        a:hover {
+            color: var(--links-hover);
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* --- Call to Action Button --- */
+        .cta-button {
+            display: block; /* Make it a block element */
+            padding: 12px 24px;
+            background-color: var(--links);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 1.5em auto; /* Center the button */
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: fit-content; /* Button width adjusts to text */
+            outline: 3px solid #e0b70b; /* 4px thick, dark yellow outline */
+            outline-offset: 0px; /* Optional: Adds 2px space between button and outline */
+            /* Adjust thickness, color, and offset as needed */
+        }
+
+        .cta-button:hover {
+            background-color: var(--links-hover);
+            color: white;
+            text-decoration: none;
+        }
+
+        /* --- Layout & Structure --- */
+        header {
+            padding: 15px 0;
+            text-align: center;
+            /* Header provides the top border line below */
+            border-bottom: 1px solid var(--borders);
+            margin-bottom: 1.5rem;
+            /* Set a minimum height in case nav is empty */
+            min-height: 50px;
+            display: flex; /* Use flex to help center nav if needed */
+            justify-content: center;
+            align-items: center;
+        }
+
+        header nav ul, footer nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0; /* Removed top margin */
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        main {
+            padding: 1.5rem 0;
+        }
+
+        section {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--borders);
+            margin-bottom: 2rem;
+        }
+
+        section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        footer {
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--borders);
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        /* --- Main Logo Image (Top Image) --- */
+        #main-logo {
+            width: 300px;           /* Set desired width */
+            height: 300px;          /* Set desired height */
+            margin: 0 auto 2rem auto; /* Center horizontally, add bottom margin */
+            background-size: contain; /* Show the whole image, don't crop (use 'cover' to fill/crop) */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Don't tile the image */
+            /* border: none; */ /* Explicitly no border (default) */
+            /* border-radius: 0; */ /* Explicitly square corners (default) */
+        }
+
+        /* --- Profile Pictures (Task Force Section) --- */
+        .profile-picture { /* Style for the DIV holding the background image */
+            width: 150px;
+            height: 150px;
+            border-radius: 25%; /* Make task force images rounded */
+            margin: 0 auto 1rem;
+            background-size: cover; /* Fill the circle */
+            background-position: center;
+            /* Removed border for consistency */
+            /* border: 1px solid var(--borders); */
+        }
+
+
+        /* --- Flexible Grid Layout --- */
+        .flex-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Try 'center' or 'flex-start' if spacing looks odd */
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .grid-item-33 {
+            width: 30%; /* Aim for 3 columns */
+            flex-grow: 0;
+            flex-shrink: 0;
+            /* Fallback for browsers that don't support gap well with flex-basis */
+            /* margin-bottom: 20px; */
+             /* If items don't line up nicely, try removing width and using flex-basis */
+            /* flex-basis: calc(33.33% - 14px); */ /* Example: Adjust based on gap */
+        }
+         .grid-item-50{ /* Currently not used, but kept for potential future use */
+             width: 48%;
+             flex-grow: 0;
+             flex-shrink: 0;
+         }
+
+        /* --- Specific Section Styles --- */
+
+        /* Hero Section Styles */
+        .hero h3 { font-size: 1rem; color: var(--secondary-text); font-weight: 600; margin-bottom: 10px; }
+        .hero h1 { margin-bottom: 10px; }
+
+        /* Services Section Styles */
+        .services h3 { margin-bottom: 2rem; }
+        .services li { margin-bottom: 1rem; text-align: center; }
+        .services .rating {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: var(--links); /* Fill color of the stars (currently blue) */
+            -webkit-text-stroke-width: 3px; /* Outline thickness */
+            -webkit-text-stroke-color: #e0b70b; /* Outline color */
+            paint-order: stroke fill; /* Draws the stroke behind the fill - looks better */
+            letter-spacing: 4px; /* Increase space between stars. Adjust this value (e.g., 3px, 5px, 6px) */
+        }
+        .services b { display: block; font-weight: 700; color: var(--primary-text); font-size: 1rem; }
+
+        /* Task Force Section Styles */
+        .task-force h3 { margin-bottom: 2rem; }
+        .task-force li { margin-bottom: 2rem; text-align: center; }
+        /* .profile-picture styles above handle the images */
+        .task-force b { display: block; margin-top: 0.5em; margin-bottom: 0.25em; font-weight: 700; }
+        .task-force p { font-size: 0.9rem; color: var(--secondary-text); }
+
+        /* Press Section Styles */
+        .press h3 { margin-bottom: 2rem; }
+        .press ul { list-style: none; padding: 0; }
+        .press-item { margin-bottom: 2rem; }
+        .press-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; }
+        .press-item-header h4 { margin-bottom: 0.25em; font-weight: 700; flex-basis: 70%; }
+        .press-item-header .date { color: var(--secondary-text); font-size: 0.9rem; white-space: nowrap; margin-left: 1em; }
+        .press-item .author-link { font-weight: 600; font-size: 0.9rem; }
+
+        /* FAQ Section Styles */
+        .faq-section { background-color: #f0f0f0; padding: 1.5rem; border-radius: 5px; border: 1px solid var(--borders); }
+        .faq-section h3 { text-align: left; margin-bottom: 1.5rem; }
+        dl { margin: 0; padding: 0; }
+        dt { font-weight: 700; margin-top: 1em; margin-bottom: 0.25em; font-size: 1.1rem; color: var(--primary-text); }
+        dd { margin-left: 0; margin-bottom: 1em; padding-left: 1em; border-left: 3px solid var(--links); font-size: 1rem; color: var(--secondary-text); }
+        dt:first-of-type { margin-top: 0; }
+
+        /* --- Footer Styles --- */
+        footer nav { margin-bottom: 10px; }
+        footer nav ul li a{ font-size: 0.9rem; }
+        footer p { color: var(--secondary-text); font-size: 0.9rem; margin-bottom: 0; }
+
+        /* --- Responsive Design (for smaller screens like phones) --- */
+        @media (max-width: 768px) {
+            /* Stack grid items vertically */
+            .grid-item-33, .grid-item-50 {
+                width: 100%; /* Full width */
+                /* Use gap property if possible, otherwise add margin */
+                 margin-bottom: 1.5rem;
+            }
+            /* Ensure last item doesn't have extra margin */
+             .flex-grid li:last-child {
+                 margin-bottom: 0;
+             }
+
+            /* Stack header navigation vertically if links were present */
+            header nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            /* Adjust heading sizes */
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+
+            /* Adjust press item header layout */
+             .press-item-header { flex-direction: column; align-items: flex-start; }
+             .press-item-header .date { margin-left: 0; margin-top: 0.25em; }
+
+             /* Adjust main logo size on smaller screens if needed */
+             #main-logo {
+                 width: 200px;
+                 height: 200px;
+                 margin-bottom: 1.5rem;
+             }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+
+        <header>
+            <nav>
+                <ul>
+                    </ul>
+            </nav>
+        </header>
+
+        <main>
+
+            <div id="main-logo" style="background-image: url('images/FBQI-Department-of-Karendians-logo-sm.png');">
+                </div>
+
+            <section class="hero" id="hero">
+                <h3>Federal Blood Quantum Investigations</h3>
+                <h1>FBQI</h1>
+                <h2>We seek to expose people's blood quantum.</h2>
+                <a target="_blank" href="mailto:karendiansinternational@gmail.com" class="cta-button">Got a grudge? Email us.</a>
+            </section>
+
+            <section class="services" id="services">
+                <h3>Services</h3>
+                <ul class="flex-grid">
+                    <li class="grid-item-33">
+                        <div class="rating">★★★★</div> <b>Ancestry.com searches</b>   </li>
+                    <li class="grid-item-33">
+                        <div class="rating">★</div>     <b>Accurate</b>                 </li>
+                    <li class="grid-item-33">
+                        <div class="rating">★★★★★</div> <b>Finding unskilled journalists to take the bait</b> </li>
+                </ul>
+            </section>
+
+            <section class="task-force" id="task-force">
+                 <h3>Pretendian Task Force</h3>
+                <ul class="flex-grid">
+                    <li class="grid-item-33">
+                         <div class="profile-picture" style="background-image: url('images/Kendian-Leroux.jpg');"></div>
+                        <b>Kendian Leroux</b>
+                        <p>Associate Professor. Wrote a book based on internet forum posts. aka: Anonymous Collective.</p>
+                    </li>
+                    <li class="grid-item-33">
+                         <div class="profile-picture" style="background-image: url('images/Karendian-Tallbear.jpg');"></div>
+                        <b>Karendian TallBear</b>
+                        <p>Associate Professor. Single polyamorist. Survivor of pretendian pandemic.</p>
+                    </li>
+                    <li class="grid-item-33">
+                         <div class="profile-picture" style="background-image: url('images/Karendian-Vowel.jpg');"></div>
+                        <b>Karendian Vowel</b>
+                        <p>100% Genuine Métis™ writer and pretend lawyer. "Jeff Bezos is awful! Check out my Amazon gift list."</p>
+                    </li>
+                     <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Karendian-Keeler.jpg');"></div>
+                        <b>Karendian Keeler</b>
+                        <p>Federally recognized Pretendian list co-creator. "It's not reconnection if I don't like you"</p>
+                    </li>
+                     <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Kendian-Cornsilk.jpg');"></div>
+                        <b>Kendian Cornsilk</b>
+                        <p>Staff genealogist. "Don't ask me about Cherokee Freedmen"</p>
+                    </li>
+                     <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Kendian-Thomas.jpg');"></div>
+                        <b>Kendian "PerpWalker" Thomas</b>
+                        <p>Head of Human Resources. Provides one-on-one sexual harassment seminars.</p>
+                    </li>
+                    <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Karendian-Costantino.jpg');"></div>
+                        <b>Karendian Costantino</b>
+                        <p>High priestess of several Facebook pages. “I’m not anti-Black, That's the color of my hair”</p>
+                    </li>
+                    <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Kendian-Coburn.jpg');"></div>
+                        <b>Kendian Coburn</b>
+                        <p>Assistant Professor. "Calling others fake makes me feel less white"</p>
+                    </li>
+                    <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Karendian-Midge.jpg');"></div>
+                        <b>Karendian Midge</b>
+                        <p>Poet, Statistician and Satire Judge. “Pretendians are 54% of the US population”</p>
+                    </li>
+                     <li class="grid-item-33">
+                          <div class="profile-picture" style="background-image: url('images/Kendian-Perry.jpg');"></div>
+                        <b>Kendian Perry</b>
+                        <p>Assistant to Keeler. Living in the UK, maintains his roots by uprooting others.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="press" id="press">
+                 <h3>Pretendians in the Press</h3>
+                 <ul>
+                    <li class="press-item">
+                        <div class="press-item-header">
+                             <h4>CBC: Indigenous filmmaker wants fines, jail time for 'pretendians' who misrepresent their identity</h4>
+                             <span class="date"><time datetime="2021-01">Jan 2021</time></span>
+                        </div>
+                        <div>
+                             <a target="_blank" href="https://www.cbc.ca/news/canada/british-columbia/calls-for-pretendians-to-face-fines-jail-1.5878330" class="author-link">by Angela Sterritt</a>
+                        </div>
+                    </li>
+                    <li class="press-item">
+                        <div class="press-item-header">
+                              <h4>APTN: Time to charge those pretending to be Indigenous with fraud: Cree lawyer</h4>
+                              <span class="date"><time datetime="2021-12">Dec 2021</time></span>
+                        </div>
+                        <div>
+                              <a target="_blank" href="https://www.aptnnews.ca/national-news/time-to-charge-those-pretending-to-be-indigenous-with-fraud-cree-lawyer/" class="author-link">by Kathleen Martens</a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="faq-section" id="faq">
+                 <h3>Frequently Asked Questions</h3>
+                <dl>
+                    <dt>Q: Nobody likes blood quantum. How do you get away with this?</dt>
+                    <dd>A: We use words like "tenuous" and "distant" and journalists are none the wiser.</dd>
+
+                    <dt>Q: Judging people by blood?</dt>
+                    <dd>A: Although it has never worked in the past, we believe it will this time. Previous attempts to enforce racial pedigrees didn't have high speed internet.</dd>
+
+                    <dt>Q: Are you working on anything else?</dt>
+                    <dd>A: We are developing a browser extension that puts blood quantum next to names eg: [[[Louis Riel 1/8th]]].</dd>
+
+                    <dt>Q: What about Tinder?</dt>
+                    <dd>A: We reached out to the developers of tinder to see if they can add a BQ filter.</dd>
+
+                    <dt>Q: What about defendians?</dt>
+                    <dd>A: Defendians protecting Pretendians cannot be our future. The Pretendian protection racket must end.</dd>
+                </dl>
+            </section>
+
+        </main>
+
+        <footer>
+             <a target="_blank" href="mailto:karendiansinternational@gmail.com" class="cta-button">Got a grudge? Email us.</a>
+            <nav>
+                <ul>
+                    <li><a target="_blank" href="https://www.twitter.com/KarendianInter1">Twitter</a></li>
+                    </ul>
+            </nav>
+             <p>©1492 Department of Karendians</p>
+        </footer>
+
+    </div> </body>
+</html>
